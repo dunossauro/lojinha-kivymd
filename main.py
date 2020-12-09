@@ -112,7 +112,10 @@ kv = '''
         MDToolbar:
             title: 'Mercado do seu Idi'
             left_action_items: [['menu', lambda x: app.back()]]
-            right_action_items: [['cart', lambda x: app.compras()]]
+            right_action_items: [\
+                ['lightbulb-outline', lambda x: app.color()],\
+                ['cart', lambda x: app.compras()]\
+            ]
 
         ScrollView:
             MDList:
@@ -181,6 +184,13 @@ class LojinhaApp(MDApp):
 
     def back(self):
         self.root.current = 'loja'
+
+    def color(self):
+        style = self.theme_cls.theme_style
+        if style == 'Light':
+            self.theme_cls.theme_style = 'Dark'
+        else:
+            self.theme_cls.theme_style = 'Light'
 
 
 LojinhaApp().run()
