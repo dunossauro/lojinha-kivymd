@@ -1,5 +1,4 @@
 from kivy.uix.screenmanager import Screen
-
 from kivymd.app import MDApp
 from kivymd.uix.button import MDRaisedButton
 
@@ -9,7 +8,7 @@ class MainApp(MDApp):
         self.theme_cls.primary_palette = 'DeepPurple'
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_hue = '200'
-        
+
         screen = Screen()
         screen.add_widget(
             MDRaisedButton(
