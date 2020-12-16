@@ -8,5 +8,5 @@ Exemplo de lojinha feita na live do twitch
 pyenv local 3.7.9
 poetry shell
 poetry install
-python main.py
+python main.py -m screen:s3,portrait
 ```
