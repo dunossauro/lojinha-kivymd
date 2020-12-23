@@ -1,0 +1,83 @@
+##:kivy
+<ListItemWithCheckbox>:
+
+    IconLeftWidget:
+        icon: root.icon
+
+    RightCheckbox:
+        on_active: root.on_checkbox_active(*args)
+
+
+<ListItemWithLabel>:
+    IconLeftWidget:
+        icon: root.icon
+
+    RightLabel:
+        text: root.preco
+
+
+<ComprasScreen>:
+    name: 'compras'
+    lista_de_compras: lista_de_compras
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: 'Mercado do seu Idi'
+            left_action_items: [['arrow-left', lambda x: app.back()]]
+        ScrollView:
+            MDList:
+                id: lista_de_compras
+
+<LojaScreen>:
+    name: 'loja'
+    lista_de_produtos: lista_de_produtos
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: 'Mercado do seu Idi'
+            left_action_items: [['menu', lambda x: x]]
+            right_action_items: [['lightbulb-outline', lambda x: app.color()], ['cart', lambda x: app.compras()]]
+
+        ScrollView:
+            MDList:
+                id: lista_de_produtos
+
+<MyCard>:
+    card: card
+    id: card
+    size_hint: (0.7, 0.7)
+    pos_hint: {"center_x": .5, "center_y": .5}
+    orientation: 'vertical'
+
+    RelativeLayout:
+        size_hint_y: 0.5
+        FitImage:
+            # size_hint_y: 0.5
+            source: './arroz.jpg'
+            allow_stretch: True
+        MDIconButton:
+            icon: 'close'
+            on_release: app.quit_card(card)
+            pos: self.parent.width - self.width, self.parent.height - self.height
+
+    BoxLayout:
+        padding: [25,0,25,25]
+        orientation: 'vertical'
+        MDLabel:
+            text: root.nome
+            font_style: 'H6'
+            theme_text_color: 'Primary'
+        MDLabel:
+            text: root.desc
+            font_style: 'Caption'
+            theme_text_color: 'Secondary'
+        RelativeLayout:
+            MDRaisedButton:
+                text: "Adicionar {}".format(root.preco)
+                font_style: 'H6'
+                on_release: root.add_to_cart()
+                theme_text_color: 'ContrastParentBackground'
+Manager:
+    LojaScreen:
+    ComprasScreen:
