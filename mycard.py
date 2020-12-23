@@ -7,32 +7,23 @@ from kivymd.uix.card import MDCard
 # Config.set("graphics", "minimum_width", 800)
 # Config.set("graphics", "minimum_height", 384)
 
-KV = '''
+KV = """
 <MyCard>:
     id: card
     size_hint: (0.7, 0.7)
     pos_hint: {"center_x": .5, "center_y": .5}
     orientation: 'vertical'
 
-    MDBoxLayout:
-        size_hint_y: 0.24
-        padding: [25,0,25,0]
-        md_bg_color: app.theme_cls.primary_color
-        
-        MDLabel:
-            text: 'Comprar'
-            font_style: 'H5'
-            theme_text_color: 'Primary'
-            # text_color: self.theme_cls.primary_color
-
+    RelativeLayout:
+        size_hint_y: 0.5
+        FitImage:
+            # size_hint_y: 0.5
+            source: './arroz.jpg'
+            allow_stretch: True
         MDIconButton:
             icon: 'close'
             on_release: app.quit_card()
-
-    FitImage:
-        size_hint_y: 0.5
-        source: './arroz2.jpg'
-        allow_stretch: True
+            pos: self.parent.width - self.width, self.parent.height - self.height
 
     BoxLayout:
         padding: [25,0,25,25]
@@ -59,12 +50,11 @@ ScreenManager:
             MDToolbar:
                 title: 'mercado'
                 left_action_items: [['menu', lambda x: x]]
-            MDLabel:
-                text: 'batata'
+            Widget:
             MDRectangleFlatButton:
                 text: 'batatinha'
                 on_press: app.press()
-'''
+"""
 
 
 class MyCard(MDCard):
@@ -73,20 +63,15 @@ class MyCard(MDCard):
 
 class TestCard(MDApp):
     def press(self, *args):
-        self.root.current_screen.add_widget(
-            MyCard()
-        )
-
+        self.root.current_screen.add_widget(MyCard())
 
     def quit_card(self, *args):
-        self.root.current_screen.remove_widget(
-            self.root.current_screen.children[0]
-        )
+        self.root.current_screen.remove_widget(self.root.current_screen.children[0])
 
     def build(self):
-        self.theme_cls.theme_style = 'Dark'
-        self.theme_cls.primary_palette = 'LightBlue'
-        self.theme_cls.primary_hue = '200'
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "LightBlue"
+        self.theme_cls.primary_hue = "200"
         return Builder.load_string(KV)
 
 
